@@ -1,8 +1,18 @@
 FROM alpine:latest
 
+ARG GIT_PROVIDER=""
+
+ENV ROOT_DIRECTORY=/srv
+
 RUN apk add --no-cache \
         git \
         git-lfs \
- && rm -rf /var/cache/apk/*
+        openssh-client \
+ && rm -rf /var/cache/apk/* \
+ && mkdir -p "${ROOT_DIRECTORY}"
 
-COPY . .
+COPY /root /
+
+WORKDIR $ROOT_DIRECTORY
+
+ENTRYPOINT ["githelper.sh"]
