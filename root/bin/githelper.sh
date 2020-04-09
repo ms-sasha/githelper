@@ -48,6 +48,8 @@ while true; do
   echo "Start periodic update..."
   echo " ... resetting"
   git reset --hard HEAD
+  echo " ... cleaning"
+  git clean -f -d -x
   echo " ... pull"
   git pull
 
