@@ -36,6 +36,11 @@ if [ ! -d ".git" ]; then
   git clone "${GIT_ORIGIN}" .
 fi
 
+if [ -f ".git/index.lock" ]; then
+  echo "File 'index.lock' found, removing..."
+  rm -f ".git/index.lock"
+fi
+
 if [ x"${GIT_USE_LFS}" = x"yes" ]; then
   echo "Git LFS configuration update..."
   echo " ... install"
