@@ -1,0 +1,28 @@
+name: 🐍 CI
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: '17 2 * * 0'
+
+jobs:
+
+  publish-image:
+    name: 📦 (Re)Build and publish Docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Build and push to GitHub Packages
+        uses: docker/build-push-action@master
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ github.repository }}/githelper
+          tag_with_ref: true
+          tag_with_sha: true
+          add_git_labels: true
+          always_pull: true
