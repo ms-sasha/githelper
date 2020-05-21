@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-set -e
+set -euo pipefail
 
 ROOT_DIRECTORY="${ROOT_DIRECTORY:-/srv}"
 
@@ -63,6 +63,14 @@ while true; do
     git lfs fetch
     echo " ... LFS pull"
     git lfs pull
+  fi
+
+  if [ x"${GIT_STATUS_FILE}" != x"" ]; then
+    jq -n \
+      --arg commit_short_sha "$(git show -s --format='%h')" \
+      --arg commit_description "$(git show -s --format='%B' | tr -s "\n" " ")" \
+      '{commit: $commit_short_sha, description: $commit_description}' \
+    > "${ROOT_DIRECTORY}/${GIT_STATUS_FILE}"
   fi
 
   echo "Sleeping..."
