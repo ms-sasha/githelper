@@ -26,6 +26,8 @@ if [ x"${GIT_PROVIDER}" != x"" ]; then
 fi
 
 if [ x"${SSH_KEY_FILE_PATH}" != x"" ]; then
+  echo "Update key information..."
+  ssh-keygen -y -f "${SSH_KEY_FILE_PATH}" > "${SSH_KEY_FILE_PATH}.pub"
   echo -e "\nHost ${GIT_PROVIDER}\n  IdentityFile ${SSH_KEY_FILE_PATH}\n" >> ~/.ssh/config
 fi
 
