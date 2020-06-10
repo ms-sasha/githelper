@@ -10,6 +10,7 @@ GIT_AUTOUPDATE="${GIT_AUTOUPDATE:-true}"
 GIT_AUTOUPDATE_INTERVAL="${GIT_AUTOUPDATE_INTERVAL:-5m}"
 
 GIT_USE_LFS="${GIT_USE_LFS:-no}"
+GIT_STATUS_FILE="${GIT_STATUS_FILE:-}"
 
 if [ -z "${GIT_ORIGIN}" ]; then
   echo "GIT_ORIGIN variable must be set to a proper Git URI, exiting..."
