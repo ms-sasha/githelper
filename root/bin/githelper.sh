@@ -59,7 +59,7 @@ while true; do
   echo " ... cleaning"
   git clean -f -d -x
   echo " ... pull"
-  git pull
+  git pull --ff-only
 
   if [ x"${GIT_USE_LFS}" = x"yes" ]; then
     echo " ... LFS fetch"
